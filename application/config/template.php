@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ $config['theme'] = '';
 */
 
 $config['theme_locations'] = array(
-  APPPATH.'themes/'
+	APPPATH . 'themes/'
 );
 
 
@@ -93,11 +93,11 @@ $template['active_template'] = 'body';
 
 $template['bootstrap']['template'] = 'template/bootstrap.php';
 $template['bootstrap']['regions'] = array(
-   'header',
-   'content',
-   'footer' => array(
-        'content' => array('<p>Copyright &copy; FKH UGM</p>'),
-    ),
+	'header',
+	'content',
+	'footer' => array(
+		'content' => array('<p>Copyright &copy; SIRARM</p>'),
+	),
 );
 
 $template['bootstrap']['parser'] = 'parser';
@@ -106,13 +106,13 @@ $template['bootstrap']['parse_template'] = FALSE;
 
 $template['default']['template'] = 'tes/mypage.php';
 $template['default']['regions'] = array(
-   'title' => array('content' => array('SIRARM')),
-   'header',
-   'content',
-   'navs',
-   'footer' => array(
-        'content' => array('<p>FKH UGM &copy; 2018</p>'),
-    ),
+	'title' => array('content' => array('SIRARM')),
+	'header',
+	'content',
+	'navs',
+	'footer' => array(
+		'content' => array('<p>SIRARM &copy; 2023</p>'),
+	),
 );
 
 $template['default']['parser'] = 'parser';
@@ -121,14 +121,14 @@ $template['default']['parse_template'] = FALSE;
 
 $template['body']['template'] = 'template/body.php';
 $template['body']['regions'] = array(
-   'title' => array('content' => array('SIRARM')),
-   'header',
-   'navs',
-   'sidenavs',
-   'content',
-   'footer' => array(
-        'content' => array('FKH UGM &copy; 2018'),
-    ),
+	'title' => array('content' => array('SIRARM')),
+	'header',
+	'navs',
+	'sidenavs',
+	'content',
+	'footer' => array(
+		'content' => array('SIRARM &copy; 2018'),
+	),
 );
 
 $template['body']['parser'] = 'parser';

@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Sep 28, 2018 at 06:58 AM
--- Server version: 5.7.19
--- PHP Version: 5.6.31
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 24 Nov 2023 pada 03.44
+-- Versi server: 10.4.28-MariaDB
+-- Versi PHP: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,18 +24,16 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `month`
+-- Struktur dari tabel `month`
 --
 
-DROP TABLE IF EXISTS `month`;
-CREATE TABLE IF NOT EXISTS `month` (
+CREATE TABLE `month` (
   `month_num` int(2) NOT NULL,
-  `month_name` varchar(20) NOT NULL,
-  PRIMARY KEY (`month_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `month_name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `month`
+-- Dumping data untuk tabel `month`
 --
 
 INSERT INTO `month` (`month_num`, `month_name`) VALUES
@@ -56,20 +53,39 @@ INSERT INTO `month` (`month_num`, `month_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_cat`
+-- Struktur dari tabel `role`
 --
 
-DROP TABLE IF EXISTS `table_cat`;
-CREATE TABLE IF NOT EXISTS `table_cat` (
-  `id_kat` int(3) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL,
+  `role_name` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `role`
+--
+
+INSERT INTO `role` (`id`, `role_name`, `created_at`, `updated_at`) VALUES
+(1, 'admin', '2023-11-23 14:35:28', '2023-11-23 14:35:32'),
+(2, 'apoteker', '2023-11-23 14:36:05', '2023-11-23 14:36:09'),
+(3, 'user', '2023-11-23 14:36:30', '2023-11-23 11:20:01');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `table_cat`
+--
+
+CREATE TABLE `table_cat` (
+  `id_kat` int(3) NOT NULL,
   `nama_kategori` varchar(30) NOT NULL,
-  `des_kat` text NOT NULL,
-  PRIMARY KEY (`id_kat`),
-  UNIQUE KEY `kategori` (`nama_kategori`)
-) ENGINE=InnoDB AUTO_INCREMENT=223 DEFAULT CHARSET=utf8;
+  `des_kat` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `table_cat`
+-- Dumping data untuk tabel `table_cat`
 --
 
 INSERT INTO `table_cat` (`id_kat`, `nama_kategori`, `des_kat`) VALUES
@@ -84,12 +100,11 @@ INSERT INTO `table_cat` (`id_kat`, `nama_kategori`, `des_kat`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_invoice`
+-- Struktur dari tabel `table_invoice`
 --
 
-DROP TABLE IF EXISTS `table_invoice`;
-CREATE TABLE IF NOT EXISTS `table_invoice` (
-  `id_tagihan` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `table_invoice` (
+  `id_tagihan` int(5) NOT NULL,
   `ref` varchar(10) NOT NULL,
   `nama_obat` varchar(30) NOT NULL,
   `harga_jual` int(11) NOT NULL,
@@ -97,12 +112,11 @@ CREATE TABLE IF NOT EXISTS `table_invoice` (
   `subtotal` int(11) NOT NULL,
   `nama_pembeli` varchar(40) NOT NULL,
   `tgl_beli` date NOT NULL,
-  `grandtotal` int(11) NOT NULL,
-  PRIMARY KEY (`id_tagihan`)
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8;
+  `grandtotal` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `table_invoice`
+-- Dumping data untuk tabel `table_invoice`
 --
 
 INSERT INTO `table_invoice` (`id_tagihan`, `ref`, `nama_obat`, `harga_jual`, `banyak`, `subtotal`, `nama_pembeli`, `tgl_beli`, `grandtotal`) VALUES
@@ -120,17 +134,19 @@ INSERT INTO `table_invoice` (`id_tagihan`, `ref`, `nama_obat`, `harga_jual`, `ba
 (105, 'zPpAfLsmd7', 'Adrome', 15000, 1, 15000, 'Amila', '2018-05-16', 25000),
 (106, 'zPpAfLsmd7', 'Amoxilin', 10000, 1, 10000, 'Amila', '2018-05-16', 25000),
 (119, 'FfndSkUmh6', 'Asam Mefenamat', 4000, 2, 8000, 'Alina', '2018-09-24', 12000),
-(120, 'FfndSkUmh6', 'Vitamin E', 4000, 1, 4000, 'Alina', '2018-09-24', 12000);
+(120, 'FfndSkUmh6', 'Vitamin E', 4000, 1, 4000, 'Alina', '2018-09-24', 12000),
+(121, 'fP5YRYg6Ms', 'Adrome', 15000, 1, 15000, 'Abcs', '2023-10-05', 35000),
+(122, 'fP5YRYg6Ms', 'Amoxilin', 10000, 2, 20000, 'Abcs', '2023-10-05', 35000),
+(123, 'QlEiAnZN39', 'Vitamin E', 4000, 1, 4000, 'asd3', '2023-10-05', 4000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_med`
+-- Struktur dari tabel `table_med`
 --
 
-DROP TABLE IF EXISTS `table_med`;
-CREATE TABLE IF NOT EXISTS `table_med` (
-  `id_obat` int(4) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `table_med` (
+  `id_obat` int(4) NOT NULL,
   `nama_obat` varchar(30) NOT NULL,
   `penyimpanan` varchar(30) NOT NULL,
   `stok` int(3) NOT NULL,
@@ -141,38 +157,32 @@ CREATE TABLE IF NOT EXISTS `table_med` (
   `harga_beli` int(11) NOT NULL,
   `harga_jual` int(11) NOT NULL,
   `nama_pemasok` varchar(30) NOT NULL,
-  `gambar` varchar(40) NOT NULL,
-  PRIMARY KEY (`id_obat`),
-  UNIQUE KEY `nama_obat` (`nama_obat`),
-  KEY `med_unit` (`unit`),
-  KEY `med_cat` (`nama_kategori`),
-  KEY `med_sup` (`nama_pemasok`)
-) ENGINE=InnoDB AUTO_INCREMENT=1037 DEFAULT CHARSET=utf8;
+  `gambar` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `table_med`
+-- Dumping data untuk tabel `table_med`
 --
 
 INSERT INTO `table_med` (`id_obat`, `nama_obat`, `penyimpanan`, `stok`, `unit`, `nama_kategori`, `kedaluwarsa`, `des_obat`, `harga_beli`, `harga_jual`, `nama_pemasok`, `gambar`) VALUES
 (1008, 'Asam Mefenamat', 'Gudang', 11, 'Semprot', 'Antioksidan', '2020-07-20', 'Untuk meringankan gejala nyeri', 4000, 4000, 'Bina Jaya Apotek', ''),
 (1016, 'Salbutamol', 'Gudang', 4, 'Sirup', 'Antioksidan', '2020-07-20', 'Tidak ada', 6000, 10000, 'Bina Jaya Apotek', ''),
-(1018, 'Adrome', 'Gudang', 6, 'Kapsul', 'Stimulan', '2020-08-20', 'Tidak untuk kucing', 12000, 15000, 'Kenanga Apotek', ''),
+(1018, 'Adrome', 'Gudang', 5, 'Kapsul', 'Stimulan', '2020-08-20', 'Tidak untuk kucing', 12000, 15000, 'Kenanga Apotek', ''),
 (1023, 'Ambroxol', 'Lemari 1', 6, 'Semprot', 'Anti Radang', '2014-08-20', '', 20000, 22000, 'Kenanga Apotek', ''),
-(1025, 'Amoxilin', 'Rak 1', 9, 'Semprot', 'Anti Radang', '2018-12-14', '', 7000, 10000, 'Tina Farma', ''),
+(1025, 'Amoxilin', 'Rak 1', 7, 'Semprot', 'Anti Radang', '2018-12-14', '', 7000, 10000, 'Tina Farma', ''),
 (1026, 'Cetirizen', 'Rak 1', 0, 'Tablet', 'Anti Radang', '2020-01-20', '', 2000, 3000, 'Kenanga Apotek', ''),
 (1027, 'Corovit', 'Gudang', 10, 'Tablet', 'Antioksidan', '2018-09-28', '', 2000, 3000, 'Kimia Farma', ''),
-(1033, 'Vitamin E', 'Rak 1', 8, 'Tablet', 'Vitamin', '2019-01-23', '', 3000, 4000, 'Bina Jaya Apotek', ''),
+(1033, 'Vitamin E', 'Rak 1', 7, 'Tablet', 'Vitamin', '2019-01-23', '', 3000, 4000, 'Bina Jaya Apotek', ''),
 (1036, 'Vitamin A', 'Rak 2', 10, 'Tablet', 'Vitamin', '2013-02-20', '', 3000, 4000, 'Bina Jaya Apotek', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_purchase`
+-- Struktur dari tabel `table_purchase`
 --
 
-DROP TABLE IF EXISTS `table_purchase`;
-CREATE TABLE IF NOT EXISTS `table_purchase` (
-  `id_pembelian` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `table_purchase` (
+  `id_pembelian` int(5) NOT NULL,
   `ref` varchar(10) NOT NULL,
   `nama_obat` varchar(30) NOT NULL,
   `harga_beli` int(11) NOT NULL,
@@ -180,12 +190,11 @@ CREATE TABLE IF NOT EXISTS `table_purchase` (
   `subtotal` int(11) NOT NULL,
   `nama_pemasok` varchar(40) NOT NULL,
   `tgl_beli` date NOT NULL,
-  `grandtotal` int(11) NOT NULL,
-  PRIMARY KEY (`id_pembelian`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+  `grandtotal` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `table_purchase`
+-- Dumping data untuk tabel `table_purchase`
 --
 
 INSERT INTO `table_purchase` (`id_pembelian`, `ref`, `nama_obat`, `harga_beli`, `banyak`, `subtotal`, `nama_pemasok`, `tgl_beli`, `grandtotal`) VALUES
@@ -204,21 +213,18 @@ INSERT INTO `table_purchase` (`id_pembelian`, `ref`, `nama_obat`, `harga_beli`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_sup`
+-- Struktur dari tabel `table_sup`
 --
 
-DROP TABLE IF EXISTS `table_sup`;
-CREATE TABLE IF NOT EXISTS `table_sup` (
-  `id_pem` int(3) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `table_sup` (
+  `id_pem` int(3) NOT NULL,
   `nama_pemasok` varchar(30) NOT NULL,
   `alamat` text NOT NULL,
-  `telepon` varchar(30) NOT NULL,
-  PRIMARY KEY (`id_pem`),
-  UNIQUE KEY `nama_supplier` (`nama_pemasok`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;
+  `telepon` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `table_sup`
+-- Dumping data untuk tabel `table_sup`
 --
 
 INSERT INTO `table_sup` (`id_pem`, `nama_pemasok`, `alamat`, `telepon`) VALUES
@@ -231,19 +237,16 @@ INSERT INTO `table_sup` (`id_pem`, `nama_pemasok`, `alamat`, `telepon`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_unit`
+-- Struktur dari tabel `table_unit`
 --
 
-DROP TABLE IF EXISTS `table_unit`;
-CREATE TABLE IF NOT EXISTS `table_unit` (
-  `id_unit` int(2) NOT NULL AUTO_INCREMENT,
-  `unit` varchar(20) NOT NULL,
-  PRIMARY KEY (`id_unit`),
-  UNIQUE KEY `unit` (`unit`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+CREATE TABLE `table_unit` (
+  `id_unit` int(2) NOT NULL,
+  `unit` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `table_unit`
+-- Dumping data untuk tabel `table_unit`
 --
 
 INSERT INTO `table_unit` (`id_unit`, `unit`) VALUES
@@ -252,12 +255,153 @@ INSERT INTO `table_unit` (`id_unit`, `unit`) VALUES
 (3, 'Sirup'),
 (4, 'Tablet');
 
+-- --------------------------------------------------------
+
 --
--- Constraints for dumped tables
+-- Struktur dari tabel `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `real_name` varchar(255) NOT NULL,
+  `role` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `real_name`, `role`, `created_at`, `updated_at`) VALUES
+(1, 'mozes', '4297f44b13955235245b2497399d7a93', 'Mozes Sapari', 1, '2023-11-22 03:56:16', '2023-11-22 03:58:34'),
+(3, 'apoteker', '4297f44b13955235245b2497399d7a93', 'Coba Apoteker', 3, '2023-11-23 19:59:11', '2023-11-24 02:21:01');
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Constraints for table `table_med`
+-- Indeks untuk tabel `month`
+--
+ALTER TABLE `month`
+  ADD PRIMARY KEY (`month_num`);
+
+--
+-- Indeks untuk tabel `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `table_cat`
+--
+ALTER TABLE `table_cat`
+  ADD PRIMARY KEY (`id_kat`),
+  ADD UNIQUE KEY `kategori` (`nama_kategori`);
+
+--
+-- Indeks untuk tabel `table_invoice`
+--
+ALTER TABLE `table_invoice`
+  ADD PRIMARY KEY (`id_tagihan`);
+
+--
+-- Indeks untuk tabel `table_med`
+--
+ALTER TABLE `table_med`
+  ADD PRIMARY KEY (`id_obat`),
+  ADD UNIQUE KEY `nama_obat` (`nama_obat`),
+  ADD KEY `med_unit` (`unit`),
+  ADD KEY `med_cat` (`nama_kategori`),
+  ADD KEY `med_sup` (`nama_pemasok`);
+
+--
+-- Indeks untuk tabel `table_purchase`
+--
+ALTER TABLE `table_purchase`
+  ADD PRIMARY KEY (`id_pembelian`);
+
+--
+-- Indeks untuk tabel `table_sup`
+--
+ALTER TABLE `table_sup`
+  ADD PRIMARY KEY (`id_pem`),
+  ADD UNIQUE KEY `nama_supplier` (`nama_pemasok`);
+
+--
+-- Indeks untuk tabel `table_unit`
+--
+ALTER TABLE `table_unit`
+  ADD PRIMARY KEY (`id_unit`),
+  ADD UNIQUE KEY `unit` (`unit`);
+
+--
+-- Indeks untuk tabel `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `role`
+--
+ALTER TABLE `role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT untuk tabel `table_cat`
+--
+ALTER TABLE `table_cat`
+  MODIFY `id_kat` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
+
+--
+-- AUTO_INCREMENT untuk tabel `table_invoice`
+--
+ALTER TABLE `table_invoice`
+  MODIFY `id_tagihan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+
+--
+-- AUTO_INCREMENT untuk tabel `table_med`
+--
+ALTER TABLE `table_med`
+  MODIFY `id_obat` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1037;
+
+--
+-- AUTO_INCREMENT untuk tabel `table_purchase`
+--
+ALTER TABLE `table_purchase`
+  MODIFY `id_pembelian` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT untuk tabel `table_sup`
+--
+ALTER TABLE `table_sup`
+  MODIFY `id_pem` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+
+--
+-- AUTO_INCREMENT untuk tabel `table_unit`
+--
+ALTER TABLE `table_unit`
+  MODIFY `id_unit` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `table_med`
 --
 ALTER TABLE `table_med`
   ADD CONSTRAINT `med_cat` FOREIGN KEY (`nama_kategori`) REFERENCES `table_cat` (`nama_kategori`) ON UPDATE CASCADE,
